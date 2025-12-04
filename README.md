@@ -1,55 +1,138 @@
-<<<<<<< HEAD
-# Welcome to your Expo app 👋
+# Tonica
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+**Tonica** is a sleek and intuitive mobile music player built with **React Native**, **Expo**, and **TypeScript**. It is designed for smooth user experience and includes essential features such as music playback, playlists, and a modern interface.
 
-## Get started
+---
 
-1. Install dependencies
+## Table of Contents
 
-   ```bash
-   npm install
-   ```
+- [Features](#features)  
+- [Tech Stack](#tech-stack)  
+- [Architecture](#architecture)  
+- [Folder Structure](#folder-structure)  
+- [Installation](#installation)  
+- [Usage](#usage)  
+- [Future Improvements](#future-improvements)
 
-2. Start the app
+---
 
-   ```bash
-   npx expo start
-   ```
+## Features
 
-In the output, you'll find options to open the app in a
+- Play, pause, skip, shuffle, and repeat tracks  
+- Browse and search local music library  
+- Create and manage playlists  
+- Now Playing screen with album art and song metadata  
+- Background playback with lock screen controls  
+- Light & Dark mode support  
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+---
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+## Tech Stack
 
-## Get a fresh project
+- **React Native & Expo** – cross-platform mobile development  
+- **TypeScript** – type safety and maintainability  
+- **expo-av** – audio playback  
+- **Expo Router** – filesystem-based routing for screens  
+- **React Context + Hooks** – global state management  
 
-When you're ready, run:
+---
+
+## Architecture
+
+Tonica follows a **modular architecture**, separating UI, business logic, state management, and services for scalability and maintainability.
+
+### **1. App Router**
+- Uses **filesystem-based routing** (`app/` directory) with Expo Router.  
+- `_layout.tsx` defines shared layout, including **tabs** (Home, Library, Playlists).  
+- Each `.tsx` file in `app/` represents a route (`index.tsx` → Home, `library.tsx` → Library, etc.).  
+
+### **2. Screens**
+- **UI-focused** components representing app pages.  
+- Examples: `HomeScreen`, `LibraryScreen`, `PlaylistsScreen`, `NowPlayingScreen`.  
+- Screens delegate logic to services and hooks for clean separation.  
+
+### **3. Components**
+- Reusable UI components: `PlayerControls`, `SongCard`, `AlbumArt`.  
+- Keeps screens clean and promotes code reuse.  
+
+### **4. Context / State Management**
+- `PlayerContext` manages **global playback state**: current track, playlist, position, shuffle/repeat.  
+- Uses `React.createContext` and `useReducer` for predictable state updates.  
+- Allows multiple screens to remain synchronized with playback state.  
+
+### **5. Services**
+- `AudioService` handles **audio playback** using `expo-av`.  
+- `FileService` handles **local music files and playlists**.  
+- Keeps all **business logic separate** from UI components.  
+
+### **6. Hooks**
+- Custom hooks like `useAudioPlayer` encapsulate playback logic and expose easy-to-use functions to screens/components.  
+
+### **7. Types**
+- All important entities are strongly typed:  
+  - `Track`: represents a music track with title, artist, URI, artwork, duration.  
+  - `Playlist`: collection of tracks.  
+
+---
+
+## Folder Structure
+```
+Tonica/
+│
+├─ app/ # App Router screens
+│ ├─ _layout.tsx # Tabs layout
+│ ├─ index.tsx # Home screen
+│ ├─ library.tsx # Library screen
+│ ├─ playlists.tsx # Playlists screen
+│ └─ now-playing.tsx # Now Playing screen
+│
+├─ components/ # Reusable UI components
+│ ├─ PlayerControls.tsx
+│ ├─ SongCard.tsx
+│ └─ AlbumArt.tsx
+│
+├─ context/ # Global state
+│ └─ PlayerContext.tsx
+│
+├─ hooks/ # Custom hooks
+│ └─ useAudioPlayer.ts
+│
+├─ services/ # Business logic
+│ ├─ AudioService.ts
+│ └─ FileService.ts
+│
+├─ types/ # TypeScript type definitions
+│ ├─ track.ts
+│ └─ playlist.ts
+│
+├─ assets/ # Images, fonts, audio
+│ ├─ album_art/
+│ ├─ icons/
+│ └─ fonts/
+│
+├─ App.tsx # Entry point
+├─ package.json
+└─ tsconfig.json
+
+```
+---
+
+## Installation
+
+1. Clone the repository:
 
 ```bash
-npm run reset-project
+git clone https://github.com/your-username/Tonica.git
+cd Tonica
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
-=======
-# Tonica
-A sleek, intuitive mobile music player built with React Native &amp; Expo. Designed for smooth user experience, it features essential playback controls, playlist management, and beautiful UI for effortless music enjoyment.
->>>>>>> origin/main
+2. Install dependencies:
+```bash
+npm install
+# or
+yarn install
+```
+3. npx expo start
+```bash
+npx expo start
+```
